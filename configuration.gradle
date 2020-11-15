@@ -31,34 +31,3 @@ ext.projects1710 = [
 	'MineTweaker3-MC1710-Mod-NEI',
 	'MineTweaker3-MC1710-Mod-MFR'
 ]
-
-// ####################
-// ### 1.8 settings ###
-// ####################
-
-ext.forgeVersion18 = "1.8.9-11.15.1.1890-1.8.9"
-ext.projects18 = [
-	'MineTweaker3-MC18-Main',
-	'MineTweaker3-MC18-Mod-JEI'
-]
-
-// #######################
-// ### 1.10.2 settings ###
-// #######################
-
-ext.forgeVersion1102 = "1.10.2-12.18.0.2005-1.10.0"
-ext.projects1102 = [
-	'MineTweaker3-MC1102-Main',
-	'MineTweaker3-MC1102-Mod-JEI',
-	'MineTweaker3-MC1102-Mod-IC2'
-]
-
-// #######################
-// ### 1.11.2 settings ###
-// #######################
-
-ext.forgeVersion1112 = "1.11.2-13.20.0.2232"
-ext.projects1112 = [
-        'MineTweaker3-MC1112-Main',
-        'MineTweaker3-MC1112-Mod-JEI'
-]

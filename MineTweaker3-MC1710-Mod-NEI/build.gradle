@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "https://files.minecraftforge.net/maven"
         }
         maven {
             name = "sonatype"
@@ -19,9 +19,14 @@ buildscript {
 
 apply plugin: 'forge'
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 minecraft {
 	version = forgeVersion1710
-    mappings = "stable_12"
+    //mappings = "stable_12"
 }
 
 version = "1.0"
