@@ -35,10 +35,13 @@ import minetweaker.runtime.*;
 import minetweaker.runtime.providers.ScriptProviderCascade;
 import minetweaker.runtime.providers.ScriptProviderCustom;
 import minetweaker.runtime.providers.ScriptProviderDirectory;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Main mod class. Performs some general logic, initialization of the API and
@@ -77,19 +80,20 @@ public class MineTweakerMod {
 	@Mod.Instance(MODID)
 	public static MineTweakerMod INSTANCE;
 
-	public final MCRecipeManager recipes;
 	private final IScriptProvider scriptsGlobal;
 	private final ScriptProviderCustom scriptsIMC;
 
 	public MineTweakerMod() {
+		MCRecipeManager.recipes = (List<IRecipe>) CraftingManager.getInstance().getRecipeList();
 		MineTweakerImplementationAPI.init(
 				new MCOreDict(),
-				recipes = new MCRecipeManager(),
+				new MCRecipeManager(),
 				new MCFurnaceManager(),
 				MCGame.INSTANCE,
 				new MCLoadedMods(),
 				new MCFormatter(),
 				new MCVanilla());
+
 
 		MineTweakerImplementationAPI.logger.addLogger(new FileLogger(new File("minetweaker.log")));
 		MineTweakerImplementationAPI.platform = MCPlatformFunctions.INSTANCE;

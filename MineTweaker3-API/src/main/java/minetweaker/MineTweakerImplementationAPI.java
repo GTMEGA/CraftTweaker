@@ -58,8 +58,8 @@ public class MineTweakerImplementationAPI {
     private static final ListenPlayerLoggedIn LISTEN_LOGIN = new ListenPlayerLoggedIn();
     private static final ListenPlayerLoggedOut LISTEN_LOGOUT = new ListenPlayerLoggedOut();
     private static final ListenBlockInfo LISTEN_BLOCK_INFO = new ListenBlockInfo();
-    private static final EventList<ReloadEvent> ONRELOAD = new EventList<ReloadEvent>();
-    private static final EventList<ReloadEvent> ONPOSTRELOAD = new EventList<ReloadEvent>();
+    private static final EventList<ReloadEvent> ONRELOAD = new EventList<>();
+    private static final EventList<ReloadEvent> ONPOSTRELOAD = new EventList<>();
 
     static {
         minetweakerCommands = new HashMap<String, MineTweakerCommand>();
@@ -621,28 +621,7 @@ public class MineTweakerImplementationAPI {
             events.onPlayerLoggedIn(LISTEN_LOGIN);
             events.onPlayerLoggedOut(LISTEN_LOGOUT);
         }
-//
-//		byte[] currentScript = MineTweakerAPI.tweaker.getScriptData();
-//		if (currentScript != null) {
-//			System.out.println("Already loaded a script before");
-//
-//			// alread loaded a script
-//			byte[] stagedScript = MineTweakerAPI.tweaker.getStagedScriptData();
-//
-//			if (Arrays.equals(currentScript, stagedScript)) {
-//				System.out.println("No reload needed");
-//				return; // no reload necessary
-//			}
-//
-//			if (MineTweakerAPI.game.isLocked()) {
-//				System.out.println("Reload blocked");
-//				MineTweakerAPI.game.signalLockError();
-//				return;
-//			}
-//		} else {	
-//			System.out.println("First time loading a script, go ahead");
-//		}
-
+        
         MineTweakerAPI.tweaker.rollback();
         if (MineTweakerAPI.server != null) {
             if (!MineTweakerAPI.server.isCommandAdded("minetweaker")) {

@@ -111,7 +111,7 @@ public class MTTweaker implements ITweaker {
 		System.out.println("Loading scripts");
 
 		scriptData = ScriptProviderMemory.collect(scriptProvider);
-		Set<String> executed = new HashSet<String>();
+		Set<String> executed = new HashSet<>();
 
 		Iterator<IScriptIterator> scripts = scriptProvider.getScripts();
 		while (scripts.hasNext()) {
@@ -120,10 +120,10 @@ public class MTTweaker implements ITweaker {
 			if (!executed.contains(script.getGroupName())) {
 				executed.add(script.getGroupName());
 
-				Map<String, byte[]> classes = new HashMap<String, byte[]>();
+				Map<String, byte[]> classes = new HashMap<>();
 				IEnvironmentGlobal environmentGlobal = GlobalRegistry.makeGlobalEnvironment(classes);
 
-				List<ZenParsedFile> files = new ArrayList<ZenParsedFile>();
+				List<ZenParsedFile> files = new ArrayList<>();
 
 				while (script.next()) {
 					Reader reader = null;

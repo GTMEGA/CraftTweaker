@@ -10,6 +10,7 @@ import minetweaker.api.minecraft.MineTweakerMC;
 import minetweaker.api.player.IPlayer;
 import minetweaker.mc1710.network.MineTweakerLoadScriptsPacket;
 import minetweaker.mc1710.recipes.MCCraftingInventory;
+import minetweaker.mc1710.recipes.MCRecipeManager;
 import net.minecraft.entity.player.EntityPlayerMP;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -32,8 +33,8 @@ public class FMLEventHandler {
 	@SubscribeEvent
 	public void onPlayerItemCrafted(PlayerEvent.ItemCraftedEvent ev) {
 		IPlayer iPlayer = MineTweakerMC.getIPlayer(ev.player);
-		if (MineTweakerMod.INSTANCE.recipes.hasTransformerRecipes()) {
-			MineTweakerMod.INSTANCE.recipes.applyTransformations(MCCraftingInventory.get(ev.craftMatrix, ev.player), iPlayer);
+		if (MCRecipeManager.hasTransformerRecipes()) {
+			MCRecipeManager.applyTransformations(MCCraftingInventory.get(ev.craftMatrix, ev.player), iPlayer);
 		}
 
 		if (MineTweakerImplementationAPI.events.hasPlayerCrafted()) {
