@@ -28,21 +28,14 @@ public class ShapedRecipe implements ICraftingRecipe {
     
     public ShapedRecipe(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function, IRecipeAction action, boolean mirrored) {
         int numIngredients = 0;
-        for(int i = 0; i < ingredients.length; i++) {
-            IIngredient[] ingredient = ingredients[i];
-            for(int i1 = 0; i1 < ingredient.length; i1++) {
-                if(ingredient[i1] != null) {
+        for (IIngredient[] ingredient : ingredients) {
+            for (IIngredient iIngredient : ingredient) {
+                if (iIngredient != null) {
                     numIngredients++;
                 }
             }
         }
-        //        for(IIngredient[] row : ingredients) {
-        //			for(IIngredient ingredient : row) {
-        //				if(ingredient != null) {
-        //					numIngredients++;
-        //				}
-        //			}
-        //		}
+
         this.posx = new byte[numIngredients];
         this.posy = new byte[numIngredients];
         this.output = output;

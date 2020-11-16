@@ -53,7 +53,13 @@ public class RecipeConverter {
 		}
 		return type;
 	}
-
+	public static IRecipe convert(ICraftingRecipe recipe) {
+		if (recipe instanceof ShapedRecipe)
+			return RecipeConverter.convert((ShapedRecipe)recipe);
+		else
+			return RecipeConverter.convert((ShapelessRecipe) recipe);
+	}
+	
 	public static IRecipe convert(ShapelessRecipe recipe) {
 		IIngredient[] ingredients = recipe.getIngredients();
 		int type = getRecipeType(ingredients);

@@ -53,7 +53,7 @@ public class MCItemStack implements IItemStack {
 			throw new IllegalArgumentException("stack cannot be null");
 
 		stack = itemStack.copy();
-		items = Collections.<IItemStack>singletonList(this);
+		items = Collections.singletonList(this);
 	}
 
 	public MCItemStack(ItemStack itemStack, boolean wildcardSize) {
@@ -67,13 +67,13 @@ public class MCItemStack implements IItemStack {
 			throw new IllegalArgumentException("stack cannot be null");
 
 		stack = itemStack;
-		items = Collections.<IItemStack>singletonList(this);
+		items = Collections.singletonList(this);
 		this.tag = tag;
 	}
 
 	private MCItemStack(ItemStack itemStack, IData tag, boolean wildcardSize) {
 		stack = itemStack;
-		items = Collections.<IItemStack>singletonList(this);
+		items = Collections.singletonList(this);
 		this.tag = tag;
 		this.wildcardSize = wildcardSize;
 	}

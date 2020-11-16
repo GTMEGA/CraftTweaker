@@ -40,7 +40,7 @@ public interface IRecipeManager {
      * @return number of removed recipes
      */
     @ZenMethod
-    int remove(IIngredient output, @Optional boolean nbtMatch);
+    void remove(IIngredient output, @Optional boolean nbtMatch);
     
     /**
      * Adds a shaped recipe.
@@ -81,7 +81,7 @@ public interface IRecipeManager {
      * @return number of removed recipes
      */
     @ZenMethod
-    int removeShaped(IIngredient output, @Optional IIngredient[][] ingredients);
+    void removeShaped(IIngredient output, @Optional IIngredient[][] ingredients);
     
     /**
      * Removes shapeless recipes.
@@ -94,7 +94,7 @@ public interface IRecipeManager {
      * @return number of removed recipes
      */
     @ZenMethod
-    int removeShapeless(IIngredient output, @Optional IIngredient[] ingredients, @Optional boolean wildcard);
+    void removeShapeless(IIngredient output, @Optional IIngredient[] ingredients, @Optional boolean wildcard);
     
     /**
      * Performs a crafting with the specified ingredients. Returns null if no
