@@ -42,7 +42,7 @@ public interface IRecipeManager {
     @ZenMethod
     int remove(IIngredient output, @Optional boolean nbtMatch);
 
-    int remove(IIngredient output, boolean nbtMatch);
+    int remove(IIngredient output);
 
     /**
      * Adds a shaped recipe.
@@ -71,7 +71,7 @@ public interface IRecipeManager {
 
     void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function);
 
-    void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function);
+    void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeAction action);
 
     void addShapedMirrored(IItemStack output, IIngredient[][] ingredients);
     /**

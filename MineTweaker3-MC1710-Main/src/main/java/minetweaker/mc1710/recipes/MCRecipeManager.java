@@ -155,28 +155,13 @@ public final class MCRecipeManager implements IRecipeManager {
     }
 
     @Override
-    public void addShaped(IItemStack output, IIngredient[][] ingredients, IRecipeAction action) {
-        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, null, action, false));
-    }
-
-    @Override
-    public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function, IRecipeAction action) {
-        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, function, action, true));
-    }
-
-    @Override
     public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeAction action) {
         recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, null, action, true));
     }
 
     @Override
-    public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function) {
-        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, function, null, true));
-    }
-
-    @Override
-    public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients) {
-        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, null, null, true));
+    public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function, IRecipeAction action) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, function, action, true));
     }
 
     @Override
@@ -221,7 +206,7 @@ public final class MCRecipeManager implements IRecipeManager {
     }
 
     @Override
-    public int removeShaped(IIngredient output, IIngredient[][] ingredients) {
+    public int removeShaped(IIngredient output) {
         return removeShaped(output, null);
     }
 
