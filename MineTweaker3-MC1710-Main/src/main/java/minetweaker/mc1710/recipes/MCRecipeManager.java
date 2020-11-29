@@ -222,7 +222,7 @@ public final class MCRecipeManager implements IRecipeManager {
 
     @Override
     public int removeShapeless(IIngredient output, IIngredient[] ingredients) {
-        return removeShapeless(output, ingredients, true);
+        return removeShapeless(output, ingredients, false);
     }
 
     @Override
