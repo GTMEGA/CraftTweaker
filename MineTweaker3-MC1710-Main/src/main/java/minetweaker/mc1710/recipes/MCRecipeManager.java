@@ -110,12 +110,13 @@ public final class MCRecipeManager implements IRecipeManager {
     }
 
     @Override
-    public void remove(IIngredient output, @Optional boolean nbtMatch) {
+    public int remove(IIngredient output, @Optional boolean nbtMatch) {
         if(output == null) {
             MineTweakerAPI.logError("Cannot remove recipes for a null item!");
-            return;
+            return 0;
         }
         actionRemoveRecipesNoIngredients.addOutput(output, nbtMatch);
+        return 1;
     }
 
     @Override
@@ -145,21 +146,23 @@ public final class MCRecipeManager implements IRecipeManager {
     }
 
     @Override
-    public void removeShaped(IIngredient output, IIngredient[][] ingredients) {
+    public int removeShaped(IIngredient output, IIngredient[][] ingredients) {
         if(output == null) {
             MineTweakerAPI.logError("Cannot remove recipes for a null item!");
-            return;
+            return 0;
         }
         recipesToRemove.add(new ActionRemoveShapedRecipes(output, ingredients));
+        return 1;
     }
 
     @Override
-    public void removeShapeless(IIngredient output, IIngredient[] ingredients, boolean wildcard) {
+    public int removeShapeless(IIngredient output, IIngredient[] ingredients, boolean wildcard) {
         if(output == null) {
             MineTweakerAPI.logError("Cannot remove recipes for a null item!");
-            return;
+            return 0;
         }
         recipesToRemove.add(new ActionRemoveShapelessRecipes(output, ingredients, wildcard));
+        return 1;
     }
 
     @Override
