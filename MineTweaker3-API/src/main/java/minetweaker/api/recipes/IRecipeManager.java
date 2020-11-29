@@ -41,7 +41,9 @@ public interface IRecipeManager {
      */
     @ZenMethod
     int remove(IIngredient output, @Optional boolean nbtMatch);
-    
+
+    int remove(IIngredient output, boolean nbtMatch);
+
     /**
      * Adds a shaped recipe.
      *
@@ -51,7 +53,12 @@ public interface IRecipeManager {
      */
     @ZenMethod
     void addShaped(IItemStack output, IIngredient[][] ingredients, @Optional IRecipeFunction function, @Optional IRecipeAction action);
-    
+
+    void addShaped(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function);
+
+    void addShaped(IItemStack output, IIngredient[][] ingredients, IRecipeAction action);
+
+    void addShaped(IItemStack output, IIngredient[][] ingredients);
     /**
      * Adds a mirrored shaped recipe.
      *
@@ -61,7 +68,12 @@ public interface IRecipeManager {
      */
     @ZenMethod
     void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, @Optional IRecipeFunction function, @Optional IRecipeAction action);
-    
+
+    void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function);
+
+    void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function);
+
+    void addShapedMirrored(IItemStack output, IIngredient[][] ingredients);
     /**
      * Adds a shapeless recipe.
      *
@@ -71,7 +83,13 @@ public interface IRecipeManager {
      */
     @ZenMethod
     void addShapeless(IItemStack output, IIngredient[] ingredients, @Optional IRecipeFunction function, @Optional IRecipeAction action);
-    
+
+    void addShapeless(IItemStack output, IIngredient[] ingredients, IRecipeFunction function);
+
+    void addShapeless(IItemStack output, IIngredient[] ingredients, IRecipeAction action);
+
+    void addShapeless(IItemStack output, IIngredient[] ingredients);
+
     /**
      * Removes shaped recipes.
      *
@@ -82,7 +100,8 @@ public interface IRecipeManager {
      */
     @ZenMethod
     int removeShaped(IIngredient output, @Optional IIngredient[][] ingredients);
-    
+
+    int removeShaped(IIngredient output);
     /**
      * Removes shapeless recipes.
      *
@@ -95,7 +114,13 @@ public interface IRecipeManager {
      */
     @ZenMethod
     int removeShapeless(IIngredient output, @Optional IIngredient[] ingredients, @Optional boolean wildcard);
-    
+
+    int removeShapeless(IIngredient output, boolean wildcard);
+
+    int removeShapeless(IIngredient output, IIngredient[] ingredients);
+
+    int removeShapeless(IIngredient output);
+
     /**
      * Performs a crafting with the specified ingredients. Returns null if no
      * crafting recipe exists.

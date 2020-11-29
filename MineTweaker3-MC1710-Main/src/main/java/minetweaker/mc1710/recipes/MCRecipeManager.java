@@ -110,6 +110,11 @@ public final class MCRecipeManager implements IRecipeManager {
     }
 
     @Override
+    public int remove(IIngredient output) {
+        return remove(output, false);
+    }
+
+    @Override
     public int remove(IIngredient output, @Optional boolean nbtMatch) {
         if(output == null) {
             MineTweakerAPI.logError("Cannot remove recipes for a null item!");
@@ -120,8 +125,38 @@ public final class MCRecipeManager implements IRecipeManager {
     }
 
     @Override
+    public void addShaped(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, function, null, false));
+    }
+
+    @Override
+    public void addShaped(IItemStack output, IIngredient[][] ingredients, IRecipeAction action) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, null, action, false));
+    }
+
+    @Override
+    public void addShaped(IItemStack output, IIngredient[][] ingredients) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, null, null, false));
+    }
+
+    @Override
     public void addShaped(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function, IRecipeAction action) {
         recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, function, action, false));
+    }
+
+    @Override
+    public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, function, null, true));
+    }
+
+    @Override
+    public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, null, null, true));
+    }
+
+    @Override
+    public void addShaped(IItemStack output, IIngredient[][] ingredients, IRecipeAction action) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, null, action, false));
     }
 
     @Override
@@ -130,11 +165,41 @@ public final class MCRecipeManager implements IRecipeManager {
     }
 
     @Override
+    public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeAction action) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, null, action, true));
+    }
+
+    @Override
+    public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients, IRecipeFunction function) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, function, null, true));
+    }
+
+    @Override
+    public void addShapedMirrored(IItemStack output, IIngredient[][] ingredients) {
+        recipesToAdd.add(new ActionAddShapedRecipe(output, ingredients, null, null, true));
+    }
+
+    @Override
     public void addShapeless(IItemStack output, IIngredient[] ingredients, IRecipeFunction function, IRecipeAction action) {
         if(checkShapelessNulls(output, ingredients))
             return;
         
         recipesToAdd.add(new ActionAddShapelessRecipe(output, ingredients, function, action));
+    }
+
+    @Override
+    public void addShapeless(IItemStack output, IIngredient[] ingredients, IRecipeFunction function){
+        addShapeless(output, ingredients, function, null);
+    }
+
+    @Override
+    public void addShapeless(IItemStack output, IIngredient[] ingredients, IRecipeAction action){
+        addShapeless(output, ingredients, null, action);
+    }
+
+    @Override
+    public void addShapeless(IItemStack output, IIngredient[] ingredients){
+        addShapeless(output, ingredients, null, null);
     }
 
     private boolean checkShapelessNulls(IItemStack output, IIngredient[] ingredients) {
@@ -156,6 +221,11 @@ public final class MCRecipeManager implements IRecipeManager {
     }
 
     @Override
+    public int removeShaped(IIngredient output, IIngredient[][] ingredients) {
+        return removeShaped(output, null);
+    }
+
+    @Override
     public int removeShapeless(IIngredient output, IIngredient[] ingredients, boolean wildcard) {
         if(output == null) {
             MineTweakerAPI.logError("Cannot remove recipes for a null item!");
@@ -163,6 +233,21 @@ public final class MCRecipeManager implements IRecipeManager {
         }
         recipesToRemove.add(new ActionRemoveShapelessRecipes(output, ingredients, wildcard));
         return 1;
+    }
+
+    @Override
+    public int removeShapeless(IIngredient output, IIngredient[] ingredients) {
+        return removeShapeless(output, ingredients, true);
+    }
+
+    @Override
+    public int removeShapeless(IIngredient output, boolean wildcard) {
+        return removeShapeless(output, null, wildcard);
+    }
+
+    @Override
+    public int removeShapeless(IIngredient output) {
+        return removeShapeless(output, null, true);
     }
 
     @Override
