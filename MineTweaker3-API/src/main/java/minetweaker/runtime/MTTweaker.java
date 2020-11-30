@@ -52,6 +52,7 @@ public class MTTweaker implements ITweaker {
 
 		Object overrideKey = action.getOverrideKey();
 		if (wereStuck.contains(action)) {
+			MineTweakerAPI.logInfo("WAS STUCK");
 			wereStuck.remove(action);
 
 			if (overrideKey != null) {
@@ -76,7 +77,8 @@ public class MTTweaker implements ITweaker {
 
 	@Override
 	public List<IUndoableAction> rollback() {
-		List<IUndoableAction> stuck = new ArrayList<IUndoableAction>();
+		// Note: Requires a OnRollback event to be fired.  If this is called from MineTweakerImplementationAPI it's handled there.
+		List<IUndoableAction> stuck = new ArrayList<>();
 		for (int i = actions.size() - 1; i >= 0; i--) {
 			IUndoableAction action = actions.get(i);
 			if (action.canUndo()) {

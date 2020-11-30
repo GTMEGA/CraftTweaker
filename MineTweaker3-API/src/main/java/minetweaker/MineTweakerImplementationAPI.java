@@ -58,6 +58,7 @@ public class MineTweakerImplementationAPI {
     private static final ListenPlayerLoggedIn LISTEN_LOGIN = new ListenPlayerLoggedIn();
     private static final ListenPlayerLoggedOut LISTEN_LOGOUT = new ListenPlayerLoggedOut();
     private static final ListenBlockInfo LISTEN_BLOCK_INFO = new ListenBlockInfo();
+    private static final EventList<ReloadEvent> ONROLLBACK = new EventList<>();
     private static final EventList<ReloadEvent> ONRELOAD = new EventList<>();
     private static final EventList<ReloadEvent> ONPOSTRELOAD = new EventList<>();
 
@@ -573,6 +574,9 @@ public class MineTweakerImplementationAPI {
      * @param handler
      * @return
      */
+    public static IEventHandle onRollbackEvent(IEventHandler<ReloadEvent> handler) {
+        return ONROLLBACK.add(handler);
+    }
     public static IEventHandle onReloadEvent(IEventHandler<ReloadEvent> handler) {
         return ONRELOAD.add(handler);
     }
@@ -623,6 +627,8 @@ public class MineTweakerImplementationAPI {
         }
         
         MineTweakerAPI.tweaker.rollback();
+        ONROLLBACK.publish(new ReloadEvent());
+        
         if (MineTweakerAPI.server != null) {
             if (!MineTweakerAPI.server.isCommandAdded("minetweaker")) {
                 server.addCommand("minetweaker", "", new String[]{"mt", "crafttweaker", "ct"}, new ICommandFunction() {
