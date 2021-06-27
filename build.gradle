@@ -1,16 +1,41 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            name = "gt"
+            url = "https://gregtech.overminddl1.com/"
+        }
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            name = "jitpack"
+            url = "https://jitpack.io"
+        }
+    }
+    dependencies {
+        classpath "com.github.GTNH2:ForgeGradle:FG_1.2-SNAPSHOT"
+    }
+}
+
 apply plugin: 'base' // To add "clean" task to the root project.
 apply from: 'configuration.gradle'
 apply plugin: "maven"
 
-
-
 subprojects {
     apply from: rootProject.file('common.gradle')
+    apply plugin: 'eclipse'
 }
 repositories {
     mavenLocal()
     mavenCentral()
-    maven {
+    /*maven {
         name "Tesla"
         url 'http://maven.epoxide.xyz'
     }
@@ -21,18 +46,13 @@ repositories {
     maven {
         name 'JEI'
         url "http://dvs1.progwml6.com/files/maven"
-    }
+    } unused */
 }
 configurations {
     deployerJars
 }
 dependencies {
     deployerJars 'org.apache.maven.wagon:wagon-ftp:2.2'
-}
-
-
-task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
-    gradleVersion = '3.0'
 }
 
 subprojects.each { subproject -> evaluationDependsOn( subproject.path ) }
