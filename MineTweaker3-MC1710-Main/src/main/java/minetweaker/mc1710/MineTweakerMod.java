@@ -35,6 +35,7 @@ import minetweaker.runtime.*;
 import minetweaker.runtime.providers.ScriptProviderCascade;
 import minetweaker.runtime.providers.ScriptProviderCustom;
 import minetweaker.runtime.providers.ScriptProviderDirectory;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
@@ -82,6 +83,7 @@ public class MineTweakerMod {
 
 	private final IScriptProvider scriptsGlobal;
 	private final ScriptProviderCustom scriptsIMC;
+	private volatile boolean loaded = false;
 
 	public MineTweakerMod() {
 		MCRecipeManager.recipes = (List<IRecipe>) CraftingManager.getInstance().getRecipeList();
@@ -127,6 +129,8 @@ public class MineTweakerMod {
 
 	@EventHandler
 	public void onLoad(FMLPreInitializationEvent ev) {
+		MineTweakerConfig.file = new File(ev.getModConfigurationDirectory(), MODID + ".cfg");
+		MineTweakerConfig.load();
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
 		FMLCommonHandler.instance().bus().register(new FMLEventHandler());
 	}
@@ -148,17 +152,13 @@ public class MineTweakerMod {
 		ItemBracketHandler.rebuildItemRegistry();
 		LiquidBracketHandler.rebuildLiquidRegistry();
 		MineTweakerAPI.logInfo("MineTweaker: Sucessfully built item registry");
+		if (MineTweakerPlatformUtils.isClient()) {
+			MineTweakerAPI.client = new MCClient();
+		}
 	}
 
 	@EventHandler
 	public void onServerAboutToStart(FMLServerAboutToStartEvent ev) {
-		// starts before loading worlds
-		// perfect place to start MineTweaker!
-
-		if (MineTweakerPlatformUtils.isClient()) {
-			MineTweakerAPI.client = new MCClient();
-		}
-
 		File scriptsDir = new File(MineTweakerHacks.getWorldDirectory(ev.getServer()), "scripts");
 		if (!scriptsDir.exists()) {
 			scriptsDir.mkdir();
@@ -168,12 +168,21 @@ public class MineTweakerMod {
 		IScriptProvider cascaded = new ScriptProviderCascade(scriptsIMC, scriptsGlobal,scriptsLocal);
 
 		MineTweakerImplementationAPI.setScriptProvider(cascaded);
-		MineTweakerImplementationAPI.onServerStart(new MCServer(ev.getServer()));
+		MCServer srv = new MCServer(ev.getServer());
+		if (loaded && MineTweakerConfig.antiStuck) MineTweakerAPI.server = srv;
+		else {
+			MineTweakerImplementationAPI.onServerStart(srv);
+			loaded = true;
+		}
 	}
 
-	@EventHandler
-	public void onServerStarting(FMLServerStartingEvent ev) {
-
+	public void onClientAboutToConnect() {
+		if (!MineTweakerConfig.loadScriptsBeforeConnection) return;
+		IScriptProvider cascaded = new ScriptProviderCascade(scriptsIMC, scriptsGlobal);
+		MineTweakerImplementationAPI.setScriptProvider(cascaded);
+		if (loaded && MineTweakerConfig.antiStuck) return;
+		MineTweakerImplementationAPI.reload();
+		loaded = true;
 	}
 
 	@EventHandler
