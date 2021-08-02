@@ -239,7 +239,9 @@ public class GlobalRegistry {
 			symbols = new HashMap<String, IZenSymbol>();
 			generator = new ClassNameGenerator();
 		}
-
+        @Override
+        public ClassNameGenerator getClassNameGenerator(){ return generator;}
+        
 		@Override
 		public IZenCompileEnvironment getEnvironment() {
 			return environment;
