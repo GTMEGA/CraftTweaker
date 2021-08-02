@@ -22,7 +22,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent;
 public class FMLEventHandler {
 	@SubscribeEvent
 	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent ev) {
-		if (ev.player instanceof EntityPlayerMP) {
+		if (ev.player instanceof EntityPlayerMP && MineTweakerConfig.sendLoadScripts) {
 			EntityPlayerMP player = (EntityPlayerMP) ev.player;
 			MineTweakerMod.NETWORK.sendTo(new MineTweakerLoadScriptsPacket(MineTweakerAPI.tweaker.getScriptData()), player);
 		}

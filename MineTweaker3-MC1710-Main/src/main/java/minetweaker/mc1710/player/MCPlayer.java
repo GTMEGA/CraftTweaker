@@ -12,6 +12,7 @@ import minetweaker.api.data.IData;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
 import minetweaker.api.player.IPlayer;
+import minetweaker.mc1710.MineTweakerConfig;
 import minetweaker.mc1710.MineTweakerMod;
 import minetweaker.mc1710.data.NBTConverter;
 import minetweaker.mc1710.network.MineTweakerCopyClipboardPacket;
@@ -126,7 +127,7 @@ public class MCPlayer implements IPlayer {
 
 	@Override
 	public void openBrowser(String url) {
-		if (player instanceof EntityPlayerMP) {
+		if (player instanceof EntityPlayerMP && MineTweakerConfig.handleDesktopPackets) {
 			MineTweakerMod.NETWORK.sendTo(
 					new MineTweakerOpenBrowserPacket(url),
 					(EntityPlayerMP) player);
@@ -135,7 +136,7 @@ public class MCPlayer implements IPlayer {
 
 	@Override
 	public void copyToClipboard(String value) {
-		if (player instanceof EntityPlayerMP) {
+		if (player instanceof EntityPlayerMP && MineTweakerConfig.handleDesktopPackets) {
 			MineTweakerMod.NETWORK.sendTo(
 					new MineTweakerCopyClipboardPacket(value),
 					(EntityPlayerMP) player);

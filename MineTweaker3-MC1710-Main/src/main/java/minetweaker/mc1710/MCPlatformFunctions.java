@@ -32,7 +32,7 @@ public class MCPlatformFunctions implements IPlatformFunctions {
 
 	@Override
 	public void distributeScripts(byte[] data) {
-		MineTweakerMod.NETWORK.sendToAll(new MineTweakerLoadScriptsPacket(data));
+		if (MineTweakerConfig.sendScriptsOnReloading) MineTweakerMod.NETWORK.sendToAll(new MineTweakerLoadScriptsPacket(data));
 	}
 
 	@Override
