@@ -12,13 +12,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 import minetweaker.MineTweakerAPI;
@@ -74,7 +68,7 @@ public class ScriptProviderMemory implements IScriptProvider {
 	private final Map<String, MemoryModule> modules;
 
 	public ScriptProviderMemory(byte[] scripts) {
-		modules = new HashMap<String, MemoryModule>();
+		modules = new TreeMap<String, MemoryModule>();
 
 		try {
 			InflaterInputStream inflater = new InflaterInputStream(new ByteArrayInputStream(scripts));
