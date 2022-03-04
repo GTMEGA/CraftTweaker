@@ -1,7 +1,10 @@
-import java.io.File
+import javax.tools.ToolProvider
 
 apply plugin: 'java'
-apply from: new File('../configuration.gradle')
+
+//Make sure JAVA_HOME is set as an environment variable
+ext.javaToolsJar = ((URLClassLoader) ToolProvider.getSystemToolClassLoader()).getURLs()
+
 
 repositories {
 	mavenCentral();

@@ -1,0 +1,5 @@
+dependencies {
+	shadeCompile("com.github.GTNewHorizons:ZenScript:1.0.0-GTNH")
+    compile("net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev")
+    compile("com.github.GTNewHorizons:NotEnoughItems:2.2.9-GTNH:dev")
+}
