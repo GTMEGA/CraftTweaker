@@ -48,22 +48,22 @@ public class ServerPlayer implements IPlayer {
 		// TODO: implement
 		return null;
 	}
-    
+
     @Override
     public int getXP() {
         return 0;
     }
-    
+
     @Override
     public void setXP(int xp) {
-    
+
     }
-    
+
     @Override
     public void removeXP(int xp) {
-    
+
     }
-    
+
     @Override
 	public void update(IData data) {
 		// TODO: implement
@@ -76,6 +76,10 @@ public class ServerPlayer implements IPlayer {
 
 	@Override
 	public void sendChat(String message) {
+        if (message.length() > MAX_CHAT_MESSAGE_LENGTH)
+        {
+            message = message.substring(0, MAX_CHAT_MESSAGE_LENGTH);
+        }
 		DedicatedServer.getServer().addChatMessage(new ChatComponentText(message));
 	}
 
