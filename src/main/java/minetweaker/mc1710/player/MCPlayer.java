@@ -51,25 +51,25 @@ public class MCPlayer implements IPlayer {
 	public IData getData() {
 		return NBTConverter.from(player.getEntityData(), true);
 	}
-    
+
     @Override
     public int getXP() {
         return player.experienceLevel;
     }
-    
+
     @Override
     public void setXP(int xp) {
         player.experienceLevel = 0;
         player.addExperienceLevel(xp);
     }
-    
+
     @Override
     public void removeXP(int xp) {
         final int newLvl = Math.max(0, player.experienceLevel - xp);
         player.experienceLevel = 0;
         player.addExperienceLevel(newLvl);
     }
-    
+
     @Override
 	public void update(IData data) {
 		NBTConverter.updateMap(player.getEntityData(), data);
@@ -87,6 +87,10 @@ public class MCPlayer implements IPlayer {
 
 	@Override
 	public void sendChat(String message) {
+        if (message.length() > MAX_CHAT_MESSAGE_LENGTH)
+        {
+            message = message.substring(0, MAX_CHAT_MESSAGE_LENGTH);
+        }
 		player.addChatMessage(new ChatComponentText(message));
 	}
 

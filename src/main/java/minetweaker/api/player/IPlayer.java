@@ -35,6 +35,8 @@ public interface IPlayer {
     @ZenMethod
     void sendChat(IChatMessage message);
 
+    int MAX_CHAT_MESSAGE_LENGTH = 512;
+
     @ZenMethod
     void sendChat(String message);
 

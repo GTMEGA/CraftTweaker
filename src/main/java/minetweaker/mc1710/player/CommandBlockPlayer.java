@@ -37,22 +37,22 @@ public class CommandBlockPlayer implements IPlayer{
     public IData getData(){
         return null;
     }
-    
+
     @Override
     public int getXP() {
         return 0;
     }
-    
+
     @Override
     public void setXP(int xp) {
-    
+
     }
-    
+
     @Override
     public void removeXP(int xp) {
-    
+
     }
-    
+
     @Override
     public void update(IData data){
 
@@ -70,6 +70,10 @@ public class CommandBlockPlayer implements IPlayer{
 
     @Override
     public void sendChat(String message){
+        if (message.length() > MAX_CHAT_MESSAGE_LENGTH)
+        {
+            message = message.substring(0, MAX_CHAT_MESSAGE_LENGTH);
+        }
         sender.addChatMessage(new ChatComponentText(message));
     }
 
