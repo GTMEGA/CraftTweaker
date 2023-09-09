@@ -1,6 +1,0 @@
-
-# CraftTweaker
-
-Changelog of CraftTweaker.
-
-
