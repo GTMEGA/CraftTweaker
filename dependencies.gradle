@@ -1,5 +1,6 @@
 dependencies {
     shadeCompile("com.github.GTNewHorizons:ZenScript:1.0.0-GTNH")
-    implementation("net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev")
-    implementation("codechicken:notenoughitems-mc1.7.10:2.1.6-gtmega:dev")
+    compileOnly("net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev")
+    implementation("codechicken:codechickencore-mc1.7.10:1.3.2-mega:dev")
+    compileOnly("codechicken:notenoughitems-mc1.7.10:2.1.6-gtmega:dev")
 }
