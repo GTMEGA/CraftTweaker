@@ -141,7 +141,7 @@ public class MCServer extends AbstractServer {
 
         @Override
         public int compareTo(Object o) {
-            return 0;
+            return this.getCommandName().compareTo(((ICommand) o).getCommandName());
         }
     }
 
