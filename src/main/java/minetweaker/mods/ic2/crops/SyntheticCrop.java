@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.crops.CropCard;
 import ic2.api.crops.ICropTile;
 import minetweaker.MineTweakerAPI;
+import minetweaker.annotations.ModOnly;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -30,6 +31,7 @@ import stanhebben.zenscript.annotations.ZenSetter;
  *
  */
 @ZenClass("mods.ic2.SyntheticCrop")
+@ModOnly("IC2")
 public class SyntheticCrop extends CropCard {
 
 	private String name;

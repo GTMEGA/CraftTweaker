@@ -1,5 +1,6 @@
 package minetweaker.mods.ic2.crops;
 
+import minetweaker.annotations.ModOnly;
 import minetweaker.api.item.IItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
@@ -11,6 +12,7 @@ import stanhebben.zenscript.annotations.ZenSetter;
  *
  */
 @ZenClass("mods.ic2.GrowthRequirements")
+@ModOnly("IC2")
 public class GrowthRequirements {
 	
 	private int minNutrients;

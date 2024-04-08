@@ -1,6 +1,7 @@
 package minetweaker.mods.ic2.crops;
 
 import ic2.api.crops.CropCard;
+import minetweaker.annotations.ModOnly;
 import stanhebben.zenscript.annotations.ZenCaster;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
@@ -12,6 +13,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
  *
  */
 @ZenClass("mods.ic2.Crop")
+@ModOnly("IC2")
 public class Crop {
 	private CropCard cc;
 
