@@ -13,6 +13,8 @@ import static minetweaker.api.minecraft.MineTweakerMC.getIItemStack;
 import static minetweaker.api.minecraft.MineTweakerMC.getItemStack;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
+import minetweaker.mc1710.item.MCItemStack;
+
 import net.minecraft.item.ItemStack;
 
 /**
@@ -29,7 +31,7 @@ public class IC2RecipeInput implements IRecipeInput {
 
 	@Override
 	public boolean matches(ItemStack subject) {
-		return ingredient.matches(getIItemStack(subject));
+		return ingredient.matches(MCItemStack.shallowWrap(subject));
 	}
 
 	@Override

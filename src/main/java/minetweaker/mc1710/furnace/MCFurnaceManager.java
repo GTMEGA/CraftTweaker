@@ -44,8 +44,8 @@ public class MCFurnaceManager implements IFurnaceManager {
         List<ItemStack> toRemove = new ArrayList<ItemStack>();
         List<ItemStack> toRemoveValues = new ArrayList<ItemStack>();
         for (Map.Entry<ItemStack, ItemStack> entry : smeltingList.entrySet()) {
-            if (output.matches(new MCItemStack(entry.getValue()))
-                    && (input == null || input.matches(new MCItemStack(entry.getKey())))) {
+            if (output.matches(MCItemStack.shallowWrap(entry.getValue()))
+                    && (input == null || input.matches(MCItemStack.shallowWrap(entry.getKey())))) {
                 toRemove.add(entry.getKey());
                 toRemoveValues.add(entry.getValue());
             }

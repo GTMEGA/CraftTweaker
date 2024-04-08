@@ -62,6 +62,14 @@ public class MCItemStack implements IItemStack {
 		this.wildcardSize = wildcardSize;
 	}
 
+	/**
+	 * UNSAFE UNSAFE UNSAFE
+	 * ONLY FOR INTERNAL USE, DOES NOT DEEP COPY THE ITEMSTACK!
+	 */
+	public static MCItemStack shallowWrap(ItemStack itemStack) {
+		return new MCItemStack(itemStack, null);
+	}
+
 	private MCItemStack(ItemStack itemStack, IData tag) {
 		if (itemStack == null)
 			throw new IllegalArgumentException("stack cannot be null");

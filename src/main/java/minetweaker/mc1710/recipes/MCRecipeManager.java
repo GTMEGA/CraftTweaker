@@ -76,7 +76,7 @@ public final class MCRecipeManager implements IRecipeManager {
             return false;
         } else if (ingredient != null) {
             if (input instanceof ItemStack) {
-                return ingredient.matches(getIItemStack((ItemStack) input));
+                return ingredient.matches(MCItemStack.shallowWrap((ItemStack) input));
             } else if (input instanceof String) {
                 return ingredient.contains(getOreDict((String) input));
             }
@@ -102,7 +102,7 @@ public final class MCRecipeManager implements IRecipeManager {
         List<ICraftingRecipe> results = new ArrayList<>();
 
         for (IRecipe recipe : recipes) {
-            if (ingredient.matches(MineTweakerMC.getIItemStack(recipe.getRecipeOutput()))) {
+            if (ingredient.matches(MCItemStack.shallowWrap(recipe.getRecipeOutput()))) {
                 ICraftingRecipe converted = RecipeConverter.toCraftingRecipe(recipe);
                 results.add(converted);
             }
@@ -292,7 +292,7 @@ public final class MCRecipeManager implements IRecipeManager {
         @Override
         public boolean matches(IRecipe r) {
             ItemStack recipeOutput = r.getRecipeOutput();
-            return recipeOutput != null && matches(getIItemStack(recipeOutput));
+            return recipeOutput != null && matches(MCItemStack.shallowWrap(recipeOutput));
         }
 
         @Override
@@ -300,7 +300,7 @@ public final class MCRecipeManager implements IRecipeManager {
             return recipes.parallelStream()
                     .filter(r -> {
                         ItemStack recipeOutput = r.getRecipeOutput();
-                        return recipeOutput != null && matches(getIItemStack(recipeOutput));
+                        return recipeOutput != null && matches(MCItemStack.shallowWrap(recipeOutput));
                     }).collect(Collectors.toSet());
         }
 
@@ -365,7 +365,7 @@ public final class MCRecipeManager implements IRecipeManager {
 
         @Override
         public boolean matches(IRecipe recipe) {
-            if (recipe.getRecipeOutput() == null || !output.matches(new MCItemStack(recipe.getRecipeOutput()))) {
+            if (recipe.getRecipeOutput() == null || !output.matches(MCItemStack.shallowWrap(recipe.getRecipeOutput()))) {
                 return false;
             }
             if (recipe instanceof ShapedRecipes) {
@@ -498,7 +498,7 @@ public final class MCRecipeManager implements IRecipeManager {
         @Override
         public boolean matches(IRecipe recipe) {
             final ItemStack output = recipe.getRecipeOutput();
-            if (output == null || !this.output.matches(new MCItemStack(output))) {
+            if (output == null || !this.output.matches(MCItemStack.shallowWrap(output))) {
                 return false;
             }
             if (!(recipe instanceof ShapedRecipes || recipe instanceof ShapedOreRecipe))
@@ -702,8 +702,10 @@ public final class MCRecipeManager implements IRecipeManager {
     public static void applyAdditionsAndRemovals() {
         System.out.println("MineTweaker: Applying additions and removals");
         MineTweakerAPI.apply(MCRecipeManager.actionRemoveRecipesNoIngredients);
-        if(recipesToUndo.size() > 0) {
-            recipes.removeIf(recipesToUndo::contains);
+        if(!recipesToUndo.isEmpty()) {
+            Set<IRecipe> set = new HashSet<>(recipesToUndo.size() * 10);
+            set.addAll(recipesToUndo);
+            recipes.removeIf(set::contains);
         }
         int commonPoolParallelism = getCommonPoolParallelism();
         if (commonPoolParallelism <= 1) {

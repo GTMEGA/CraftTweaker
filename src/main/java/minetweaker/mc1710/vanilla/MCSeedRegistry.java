@@ -15,6 +15,7 @@ import minetweaker.api.item.IItemStack;
 import minetweaker.api.item.WeightedItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
 import minetweaker.api.vanilla.ISeedRegistry;
+import minetweaker.mc1710.item.MCItemStack;
 import minetweaker.mc1710.util.MineTweakerHacks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
@@ -109,7 +110,7 @@ public class MCSeedRegistry implements ISeedRegistry {
 
 			for (Object entry : SEEDS) {
 				ItemStack itemStack = MineTweakerHacks.getSeedEntrySeed(entry);
-				if (pattern.matches(MineTweakerMC.getIItemStack(itemStack))) {
+				if (pattern.matches(MCItemStack.shallowWrap(itemStack))) {
 					removed.add(entry);
 				}
 			}

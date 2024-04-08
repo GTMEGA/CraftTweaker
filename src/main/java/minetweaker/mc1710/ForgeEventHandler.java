@@ -111,7 +111,7 @@ public class ForgeEventHandler {
             for(IItemStack iItemStack : iEntity.getDropsToRemove()) {
                 for(Iterator<EntityItem> iterator = ev.drops.iterator(); iterator.hasNext(); ) {
                     EntityItem drop = iterator.next();
-                    if(iItemStack.matches(new MCItemStack(drop.getEntityItem()))) {
+                    if(iItemStack.matches(MCItemStack.shallowWrap(drop.getEntityItem()))) {
                         iterator.remove();
                     }
                 }

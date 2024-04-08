@@ -17,6 +17,7 @@ import minetweaker.api.item.WeightedItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
 import minetweaker.api.vanilla.ILootRegistry;
 import minetweaker.api.vanilla.LootEntry;
+import minetweaker.mc1710.item.MCItemStack;
 import minetweaker.mc1710.util.MineTweakerHacks;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
@@ -160,7 +161,7 @@ public class MCLootRegistry implements ILootRegistry {
 			List<WeightedRandomChestContent> contents = MineTweakerHacks.getPrivateObject(recipe, "contents");
 
 			for (WeightedRandomChestContent r : contents) {
-				if (pattern.matches(MineTweakerMC.getIItemStack(r.theItemId))) {
+				if (pattern.matches(MCItemStack.shallowWrap(r.theItemId))) {
 					removed.add(r);
 				}
 			}
