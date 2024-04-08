@@ -129,8 +129,6 @@ public class MineTweakerMod {
 
 	@EventHandler
 	public void onLoad(FMLPreInitializationEvent ev) {
-		MineTweakerConfig.file = new File(ev.getModConfigurationDirectory(), MODID + ".cfg");
-		MineTweakerConfig.load();
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
 		FMLCommonHandler.instance().bus().register(new FMLEventHandler());
 	}
