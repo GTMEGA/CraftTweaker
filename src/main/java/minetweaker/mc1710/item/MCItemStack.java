@@ -163,7 +163,7 @@ public class MCItemStack implements IItemStack {
 	@Override
 	public IIngredient anyDamage() {
 		if (stack.getItem().getHasSubtypes()) {
-			MineTweakerAPI.logWarning("subitems don't have damaged states");
+			//TODO GT metaitem damaging
 			return this;
 		} else {
 			ItemStack result = new ItemStack(stack.getItem(), stack.stackSize, OreDictionary.WILDCARD_VALUE);
@@ -175,7 +175,7 @@ public class MCItemStack implements IItemStack {
 	@Override
 	public IItemStack withDamage(int damage) {
 		if (stack.getItem().getHasSubtypes()) {
-			MineTweakerAPI.logWarning("subitems don't have damaged states");
+			//TODO GT metaitem damaging
 			return this;
 		} else {
 			ItemStack result = new ItemStack(stack.getItem(), stack.stackSize, damage);
