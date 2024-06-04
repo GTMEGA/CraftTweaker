@@ -69,4 +69,8 @@ public interface IPlayer {
 
     // not an exposed method, so far. would it be useful?
     void copyToClipboard(String value);
+
+    default boolean brokenReference() {
+        return false;
+    }
 }

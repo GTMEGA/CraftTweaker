@@ -63,7 +63,12 @@ public class MTLogger implements ILogger {
         if(players.isEmpty()) {
             unprocessed.add(message2);
         } else {
-            for(IPlayer player : players) {
+            for (int i = 0; i < players.size(); i++) {
+                IPlayer player = players.get(i);
+                if (player.brokenReference()) {
+                    players.remove(i--);
+                    continue;
+                }
                 player.sendChat(message2);
             }
         }
@@ -85,7 +90,12 @@ public class MTLogger implements ILogger {
         if(players.isEmpty()) {
             unprocessed.add(message2);
         } else {
-            for(IPlayer player : players) {
+            for (int i = 0; i < players.size(); i++) {
+                IPlayer player = players.get(i);
+                if (player.brokenReference()) {
+                    players.remove(i--);
+                    continue;
+                }
                 player.sendChat(message2);
             }
         }
