@@ -293,6 +293,10 @@ public class MineTweakerAPI {
 		}
     }
 
+	public static boolean isModLoaded(String mod) {
+		return loadedMods.contains(mod);
+	}
+
 	/**
 	 * Registers a class registry. Will attempt to resolve the given class name.
 	 * Does nothing if the class could not be loaded.

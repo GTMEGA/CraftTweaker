@@ -4,6 +4,7 @@ task makeRegistry(type: RegisterZenClassesTask) {
     inputDir = file("build/classes/java/main/")
     outputDir = file("build/classes/java/main/")
     className = "minetweaker.mc1710.MineTweakerRegistry"
+    mustRunAfter("compileJava")
 }
 
 tasks.classes.dependsOn(makeRegistry)
