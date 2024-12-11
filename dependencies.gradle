@@ -1,6 +1,0 @@
-dependencies {
-    shadeCompile("com.github.GTNewHorizons:ZenScript:1.0.0-GTNH")
-    compileOnly("net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev")
-    implementation("codechicken:codechickencore-mc1.7.10:1.4.0-mega:dev")
-    compileOnly("codechicken:notenoughitems-mc1.7.10:2.3.0-mega:dev")
-}
