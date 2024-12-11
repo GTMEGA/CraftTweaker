@@ -1,23 +1,23 @@
 import minetweaker.tasks.RegisterZenClassesTask
 
 plugins {
-    id("fpgradle-minecraft") version("0.8.3")
+    id("fpgradle-minecraft") version "0.8.3"
 }
 
 group = "minetweaker"
 
 minecraft_fp {
     mod {
-        modid   = "MineTweaker3"   //REQUIRED
-        name    = "MineTweaker 3"  //REQUIRED
-        rootPkg = "minetweaker" //REQUIRED
+        modid = "MineTweaker3"
+        name = "MineTweaker 3"
+        rootPkg = "minetweaker"
     }
     publish {
         maven {
-            repoUrl  = "https://example.com/"
-            repoName = "example"
-            group    = "${project.group}"      //Convention
-            artifact = "minetweaker-mc1.7.10" //Convention
+            repoUrl = "https://mvn.falsepattern.com/gtmega_releases/"
+            repoName = "mega"
+            group = "mega"
+            artifact = "crafttweaker-mc1.7.10"
         }
     }
 }
