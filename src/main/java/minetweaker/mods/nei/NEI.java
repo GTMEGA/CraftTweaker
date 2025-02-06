@@ -1,6 +1,7 @@
 package minetweaker.mods.nei;
 
 import codechicken.nei.api.API;
+import codechicken.nei.api.ItemInfo;
 import stanhebben.zenscript.annotations.NotNull;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -138,9 +139,10 @@ public class NEI {
 		}
 	}
 	
-	private static class NEIOverrideNameAction extends OneWayAction {
+	private static class NEIOverrideNameAction implements IUndoableAction {
 		private final ItemStack item;
 		private final String name;
+		private String oldName;
 
 		public NEIOverrideNameAction(ItemStack item, String name) {
 			this.item = item;
@@ -149,12 +151,29 @@ public class NEI {
 
 		@Override
 		public void apply() {
+			oldName = ItemInfo.getNameOverride(item);
 			API.setOverrideName(item, name);
+		}
+
+		@Override
+		public boolean canUndo() {
+			return true;
+		}
+
+		@Override
+		public void undo() {
+			API.setOverrideName(item, oldName);
+			oldName = null;
 		}
 
 		@Override
 		public String describe() {
 			return "Overriding NEI item name of " + item.getUnlocalizedName() + " to " + name;
+		}
+
+		@Override
+		public String describeUndo() {
+			return "Reverting overridden NEI item name for " + item.getUnlocalizedName();
 		}
 
 		@Override
