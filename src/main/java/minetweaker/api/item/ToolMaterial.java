@@ -8,7 +8,6 @@ import minetweaker.MineTweakerAPI;
 import minetweaker.api.minecraft.MineTweakerMC;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -18,7 +17,7 @@ import java.lang.reflect.Field;
 @RequiredArgsConstructor
 public class ToolMaterial {
     @ZenMethod
-    public static void replaceMaterialRepairItem(@NotNull String materialName, @NotNull IIngredient itemStack) {
+    public static void replaceMaterialRepairItem(String materialName, IIngredient itemStack) {
         for (val material: Item.ToolMaterial.values()) {
             if (materialName.equals(material.name())) {
                 MineTweakerAPI.apply(new ApplyMaterialAction(material, MineTweakerMC.getItemStack(itemStack)));
@@ -29,8 +28,10 @@ public class ToolMaterial {
     }
 
     @ZenMethod
-    public static void printMCMaterialsToConsole() {
-
+    public static void printMCMaterialsToLog() {
+        for (val material: Item.ToolMaterial.values()) {
+            MineTweakerAPI.logInfo("[TOOL MATERIAL] " + material.name());
+        }
     }
 
     @RequiredArgsConstructor
